@@ -1,0 +1,59 @@
+version: '3.8'
+
+services:
+  fastapi_app:
+    image: datascientest/fastapi:1.0.0
+    ports:
+      - "8000:8000"
+    networks:
+      - fastapi_network
+    volumes:
+      - ./volume_for_tests:/tests_output
+
+  authentication_test:
+    build:
+      context: .
+      dockerfile: Dockerfile_authentication
+    environment:
+      - LOG=1
+    volumes:
+      - ./volume_for_tests:/tests_output
+    networks:
+      - fastapi_network
+    depends_on:
+      - fastapi_app
+    
+
+  authorization_test:
+    build:
+      context: .
+      dockerfile: Dockerfile_authorization
+    environment:
+      - LOG=1
+    volumes:
+      - ./volume_for_tests:/tests_output
+    networks:
+      - fastapi_network
+    depends_on:
+      - fastapi_app
+    
+
+  content_test:
+    build:
+      context: .
+      dockerfile: Dockerfile_content
+    environment:
+      - LOG=1
+    volumes:
+      - ./volume_for_tests:/tests_output
+    networks:
+      - fastapi_network
+    depends_on:
+      - fastapi_app
+    
+
+networks:
+  fastapi_network:
+
+volumes:
+  volume_for_tests:

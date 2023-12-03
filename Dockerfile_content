@@ -1,0 +1,10 @@
+FROM python:3.8
+
+WORKDIR /app
+
+COPY content_test.py .
+COPY wait_for_fastapi_service.py .
+
+RUN pip install requests
+
+CMD ["python", "./content_test.py"]     
