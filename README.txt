@@ -19,5 +19,3 @@ then service B starts before. But a verification that the service is fully initi
 
 Logs can be found under the volume mounted ./volume_for_tests/api_test.log on the host.
 Also, it can be found /tests_output inside the containers.
-
-Good day!
